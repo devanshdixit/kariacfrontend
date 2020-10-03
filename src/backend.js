@@ -1,0 +1,1 @@
+export const API = 'https://us-central1-database-664f5.cloudfunctions.net/api/';
