@@ -1,169 +1,146 @@
-import React, { useState } from 'react';
-import Base from '../core/Base';
-import { Link,Redirect} from "react-router-dom";
-import { register , isAutheticated  } from './helpers/index';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import LoadingBox from "../LoadingBox";
+import MessageBox from "../MessageBox";
+import { register } from "../../actions/userActions";
 
+export default function RegisterScreen(props) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-const  RegisterPage = () => {
-  const [values, setValues] = useState({
-    handle: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    error: "",
-    loading: false,
-    success: false
-  });
+  const redirect = props.location.search
+    ? props.location.search.split("=")[1]
+    : "/";
 
-  const { handle, email, password,confirmPassword, error, success ,loading} = values;
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
 
-  const handleChange = name => event => {
-    setValues({ ...values, error: false, [name]: event.target.value });
+  const dispatch = useDispatch();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Password and confirm password are not match");
+    } else {
+      dispatch(register(name, email, password));
+    }
   };
-
-  const onSubmit = event => {
-    event.preventDefault();
-    setValues({ ...values, error: false,loading :true });
-    register({ email,password,confirmPassword,handle })
-      .then(data => {
-        if (data.data.handle) {
-          setValues({ ...values, error: data.data.handle, success: false,loading:false });
-        } else if (data.data.email) {
-          setValues({ ...values, error: data.data.email, success: false,loading:false });
-        } else if (data.data.general) {
-          setValues({ ...values, error: data.data.general, success: false,loading:false });
-        } else {
-          setValues({
-            ...values,
-            loading : false,
-            handle: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-            error: "",
-            success: true,
-          });
-        }
-      })
-      .catch(console.log("Error in signup"));
-  };
-
-  const signUpForm = () => {
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [props.history, redirect, userInfo]);
+  const registerForm = () => {
     return (
-        <div className="login-form ">
-        <form  >
-            <h2 className="text-center">Register</h2>		
-            <div className="text-center social-btn">
-                
-                <Link className="btn btn-primary btn-block" to='/'><i className="fa fa-google"></i> Register with <b>Google</b></Link>
+      <div className="login-form shadow ">
+        <form>
+          <h2 className="text-center">Register</h2>
+          <div className="text-center social-btn">
+            <Link className="btn btn-primary btn-block" to="/">
+              <i className="fa fa-google"></i> Register with <b>Google</b>
+            </Link>
+          </div>
+          <div className="or-seperator">
+            <i>or</i>
+          </div>
+          <div className="form-group">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text">
+                  <span className="fa fa-user"></span>
+                </span>
+              </div>
+              <input
+                type="text"
+                className="form-control"
+                onChange={(e) => setName(e.target.value)}
+                name="username"
+                placeholder="Username"
+                required="required"
+                value={name}
+              />
             </div>
-            <div className="or-seperator"><i>or</i></div>
-        <div className="form-group">
-                <div className="input-group">                
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">
-                            <span className="fa fa-envelope"></span>
-                        </span>                    
-                    </div>
-                    <input type="text" onChange={handleChange("email")} className="form-control" name="email" placeholder="email" required="required" value={email}/>
-                </div>
+          </div>
+          <div className="form-group">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text">
+                  <span className="fa fa-envelope"></span>
+                </span>
+              </div>
+              <input
+                type="text"
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control"
+                name="email"
+                placeholder="email"
+                required="required"
+                value={email}
+              />
             </div>
-            <div className="form-group">
-                <div className="input-group">                
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">
-                            <span className="fa fa-user"></span>
-                        </span>                    
-                    </div>
-                    <input type="text" className="form-control" onChange={handleChange("handle")} name="username" placeholder="Username" required="required" value={handle}/>
-                </div>
+          </div>
+          <div className="form-group">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text">
+                  <i className="fa fa-lock"></i>
+                </span>
+              </div>
+              <input
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control"
+                name="password"
+                placeholder="Password"
+                required="required"
+                value={password}
+              />
             </div>
-            <div className="form-group">
-                <div className="input-group">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">
-                            <i className="fa fa-lock"></i>
-                        </span>                    
-                    </div>
-                    <input type="password" onChange={handleChange("password")} className="form-control" name="password" placeholder="Password" required="required" value={password}/>
-                </div>
-            </div>      
-            <div className="form-group">
-                <div className="input-group">
-                    <div className="input-group-prepend">
-                        <span className="input-group-text">
-                            <i className="fa fa-lock"></i>
-                        </span>                    
-                    </div>
-                    <input type="password" onChange={handleChange("confirmPassword")} className="form-control" name="confirmpassword" placeholder="Confirm Password" required="required"/>
-                </div>
-            </div>    
-            <div className="form-group">
-                <button type="submit"  onClick={onSubmit} className="btn btn-success btn-block login-btn">Register</button>
+          </div>
+          <div className="form-group">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text">
+                  <i className="fa fa-lock"></i>
+                </span>
+              </div>
+              <input
+                type="password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="form-control"
+                name="confirmpassword"
+                placeholder="Confirm Password"
+                required="required"
+              />
             </div>
-         
-            
+          </div>
+          <div className="form-group">
+            <button
+              type="submit"
+              onClick={submitHandler}
+              className="btn btn-success btn-block login-btn"
+            >
+              Register
+            </button>
+          </div>
         </form>
-        <p className="text-white text-center">{JSON.stringify(values)}</p>
-        
+        <div className="hint-text">
+          Already a user?{" "}
+          <Link className="text-success" to={`/signin?redirect=${redirect}`}>
+            Sign in Here!
+          </Link>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      {loading && <LoadingBox></LoadingBox>}
+      {error && <MessageBox variant="danger">{error}</MessageBox>}
+      {registerForm()}
     </div>
-    );
-  };
-
-  const successMessage = () => {
-    return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <div
-            className="alert alert-success"
-            style={{ display: success ? "" : "none" }}
-          >
-            New account was created successfully.  Please 
-            <Link to="/signin">  Signin Here</Link>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const errorMessage = () => {
-    return (
-      <div className="row">
-        <div className="col-md-6 offset-sm-3 text-left">
-          <div
-            className="alert alert-danger"
-            style={{ display: error ? "" : "none" }}
-          >
-            {error}
-          </div>
-        </div>
-      </div>
-    );
-  };
-  const performRedirect = () => {
-    if (isAutheticated()) {
-      return <Redirect to="/" />;
-    } else if (success) {
-          return <Redirect to="/" />;
-      }
-  };
-  const loadingMessage = () => {
-    return (
-      loading && (
-        <div className="alert alert-info">
-          <h2>Loading...</h2>
-        </div>
-      )
-    );
-  };
-    return (
-      <Base>
-        {loadingMessage()}
-        {successMessage()}
-        {errorMessage()}
-        {performRedirect()}
-        {signUpForm()}
-      </Base>
-    );
-};
-export default RegisterPage;
+  );
+}

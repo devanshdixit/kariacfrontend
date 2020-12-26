@@ -1,8 +1,18 @@
 
 body {
-    background-color: #f7f7f7;
-}
 
+}
+input,
+select,
+textarea {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-size: 1.0rem;
+  font-family: Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 .navbarstyle {
     background-color: #ffffff;
     
@@ -15,7 +25,26 @@ body {
 .linkbtn {
     background-color: aqua;
 }
+.productcard {
+    background-color: #f8f8f8 !important;
+}
+.navlink > li > a{
+    color: black;
+    font-weight: 600;
+    padding:10px 0px 10px 40px;
 
+}
+.navlink a:hover {
+    color: red;
+}
+.badge {
+    background-color: #f02020;
+    color: #ffffff;
+    border-radius: 50%;
+    
+    font-size: 1.1rem;
+    margin-left: 0.2rem     ;
+}
 .login-form {
     width: 340px;
     margin: 30px auto;
@@ -70,3 +99,15 @@ body {
 .input-group-addon .fa{
     font-size: 18px;
 }
+/* Checkout Steps */
+.checkout-steps > div {
+    border-top: 0.3rem #c0c0c0 solid;
+    color: #c0c0c0;
+    flex: 1;
+    padding: 1rem;
+    font-weight: bold;
+  }
+  .checkout-steps > div.active {
+    border-top-color: #f08000;
+    color: #f08000;
+  }

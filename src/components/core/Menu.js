@@ -1,10 +1,7 @@
 import React, { Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { isAutheticated } from '../auth/helpers/index'
-import send from './send.svg';
-import home from './home.svg';
-import like from './heart.svg';
-import user from './user.svg';
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../../actions/userActions";
 
 // const currentTab = (history, path) => {
 //   if (history.location.pathname === path) {
@@ -14,47 +11,120 @@ import user from './user.svg';
 //   }
 // };
 
+const Menu = () => {
+  const cart = useSelector((state) => state.cart);
+  const { cartItems } = cart;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+  const dispatch = useDispatch();
+  const signOutHandler = () => {
+    dispatch(signout());
+  };
+  return (
+    <nav className="navbar navbar-expand-md navbarstyle  shadow-sm navbar-light sticky-top ">
+      <div className="container">
+        <Link className="navbar-brand" to="/">
+          <img
+            src={`${process.env.PUBLIC_URL}/kariac.png`}
+            alt=""
+            style={{ height: "70px", width: "70px" }}
+          />
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div
+          className="collapse navbar-collapse justify-content-end"
+          id="collapsibleNavbar"
+        >
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
+                <h5
+                  className=" font-weight-bold "
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                >
+                  Home
+                </h5>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to="/cart"
+                style={{ fontSize: "20px" }}
+              >
+                <p
+                  className=" font-weight-bold"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                >
+                  Cart
+                  {cartItems.length > 0 && (
+                    <span className="badge">{cartItems.length}</span>
+                  )}
+                </p>
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to="/blogs"
+                style={{ fontSize: "20px" }}
+              >
+                <p
+                  className=" font-weight-bold"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                >
+                  Blogs
+                </p>
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle font-weight-bold"
+                to="#"
+                id="navbardrop"
+                data-toggle="dropdown"
+                style={{ fontSize: "20px" }}
+              >
+                {userInfo ? userInfo.name : 'Account'}
+              </Link>
+              <div className="dropdown-menu">
+                {userInfo ? (
+                  <Fragment>
+                   
+                     <p data-toggle="collapse"
+                  data-target=".navbar-collapse.show"> <Link className="dropdown-item"  to="/orderhistory"> Order History</Link></p>
+                    
+                    <Link className="dropdown-item" to="#" onClick={signOutHandler} data-toggle="collapse"
+                  data-target=".navbar-collapse.show">
+                      Signout
+                    </Link>
+                  </Fragment>
+                ) : (<Link className="dropdown-item" to="/signin">
+                <p
+                  data-toggle="collapse"
+                  className="font-weight-bold"
+                  data-target=".navbar-collapse.show"
+                >
+                  Signin
+                </p>
+              </Link>)}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+};
 
-const Menu =  ({ history })=> (
- 
-  <nav className="navbar justify-content-center navbar-expand shadow-sm  navbarstyle">
-  <div className="container">
-    <div className="navbar-header">
-    <Link className="nav-link" to='/'>Social Hive  </Link>
-    </div>
-    <ul className="nav navbar-nav navbar-right">
-    {isAutheticated() && (  <li className="nav-item"><Link  className="nav-link" to='/' ><img src={home} className="icon" alt=''></img></Link></li> )}
-    {isAutheticated() && (  <li className="nav-item"><Link  className="nav-link"  to='/'><img src={send} className="icon" alt=''></img></Link></li> )}
-    {isAutheticated() && (  <li className="nav-item"><Link className="nav-link"  to='/'><img src={like} className="icon" alt=''></img></Link></li>)}
-    {isAutheticated() && ( <li className="nav-item"><Link  className="nav-link"   to='/profile'><img src={user} className="icon" alt=''></img></Link></li>)}
-    {!isAutheticated() && (
-        <Fragment>
-          <li className="nav-item">
-            <Link
-              className="nav-link"
-              to="/signin"
-            >
-              
-              <button className='navbar-btn btn btn-outline-primary'>Signin</button>
-            </Link>
-          </li>
-          <li className="nav-item ">
-            <Link
-              className="nav-link"
-              to="/register"
-            >
-           <button className='navbar-btn btn btn-outline-primary'>Register</button>
-            </Link>
-          </li>
-        </Fragment>
-      )}
-    </ul>
-  </div>
-</nav>
-
-);
-
-
-
-export default withRouter(Menu);
-
+export default Menu;

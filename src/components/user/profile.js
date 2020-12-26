@@ -18,7 +18,7 @@ const  ProfilePage = () => {
 
 
 return (
-    <Base>
+    <Base title='profile'>
     
      <div>
          <button onClick={()=>{

@@ -1,0 +1,71 @@
+.w3l_banner_nav_left{
+	float: left;
+/*-- agileits --*/
+    width: 20%;
+    background: #f5f5f5;
+}
+.w3ls_vegetables ul li a,input[type="reset"],.agileinfo_mail_grid_left ul li a,.events_bottom_left2 ul li a,.w3ls_service_grids1_right a,ul.agileits_social_icons li a,.w3l_banner_nav_right_banner_pet a,.w3ls_w3l_banner_nav_right_grid_head_grid ul li a,.products-breadcrumb ul li a,.w3_footer_grid ul li a,.w3l_fresh_vegetables_grid ul li a,.wthree_footer_copy p a,.agile_top_brand_left_grid1 .button,.w3ls_logo_products_left1 ul.special_items li a,.w3ls_logo_products_left1 ul.phone_email li a{
+	transition: .5s ease-in;
+	-webkit-transition: .5s ease-in;
+	-moz-transition: .5s ease-in;
+	-o-transition: .5s ease-in;
+	-ms-transition: .5s ease-in;
+}
+.w3ls_vegetables_menu {
+    left: 13%;
+    border: none;
+    padding: 1em;
+}
+.navbar-collapse {
+    padding: 0;
+    box-shadow: 10px;
+}
+.navbar {
+    margin-bottom: 0;
+    border: none;
+    font-size: medium;
+    font-style: inherit;
+}
+.navbar-nav > li {
+    float: none;
+}
+.navbar-nav {
+    float: none;
+    margin: 0;
+}
+.navbar-nav > li > a {
+    color: #212121;
+    padding:10px 0px 10px 40px;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #db1b3b;
+    border: none;
+}
+
+.w3ls_vegetables ul li {
+    list-style-type: none;
+}
+.w3ls_vegetables ul li:first-child {
+    margin-bottom:.5em;
+}
+.w3ls_vegetables ul li a {
+    color: #212121;
+/*-- w3layouts --*/
+    display: block;
+    text-decoration: none;
+    font-size: medium;
+}
+.w3ls_vegetables ul li a:hover{
+	color:#FA1818;
+}
+@media (max-width: 767px){
+	.w3l_banner_nav_left {
+		float: none;
+		width: 100%;
+		background: #f5f5f5;
+		text-align: center;
+    }
+    .navbar-nav {
+		border-top: none;
+	}
+}
