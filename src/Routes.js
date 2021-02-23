@@ -32,19 +32,7 @@ import OrderHistoryScreen from "./Screens/OrderHistoryScreen";
 import Tracking from "./Screens/Tacking";
 
 const Routes = () => {
-  // var firebaseConfig = {
-  //   apiKey: "AIzaSyC_1qdQUmkMi8yvo0-cCyXOUZ_I_sH0rog",
-  //   authDomain: "kariac-d2375.firebaseapp.com",
-  //   databaseURL: "https://kariac-d2375.firebaseio.com",
-  //   projectId: "kariac-d2375",
-  //   storageBucket: "kariac-d2375.appspot.com",
-  //   messagingSenderId: "980816176476",
-  //   appId: "1:980816176476:web:a6f97e9215e33b5d774d99",
-  //   measurementId: "G-5F5QFF145Q",
-  // };
-  // // Initialize Firebase
-  // firebase.initializeApp(firebaseConfig);
-  // firebase.analytics();
+  
 
   return (
     <BrowserRouter>
