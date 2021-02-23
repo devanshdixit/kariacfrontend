@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
 import CheckoutSteps from "../components/CkeckoutSteps";
+import Base from '../components/core/Base';
 
 export default function ShippingAddressScreen(props) {
     const userSignin = useSelector((state) => state.userSignin);
@@ -25,6 +26,7 @@ export default function ShippingAddressScreen(props) {
       props.history.push('/payment');
     };
     return (
+      <Base>
       <div className='overflow-hidden'>
         <CheckoutSteps step1 step2></CheckoutSteps>
         <div  className='d-flex justify-content-center '>
@@ -102,5 +104,6 @@ export default function ShippingAddressScreen(props) {
         </div>
         </div>
       </div>
+      </Base>
     );
   }

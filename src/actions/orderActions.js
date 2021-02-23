@@ -14,6 +14,9 @@ import {
   ORDER_PAY_FAIL,
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
+  ORDER_TRACK_FAIL,
+  ORDER_TRACK_REQUEST,
+  ORDER_TRACK_SUCCESS,
 } from '../constants/orderConstants';
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -100,5 +103,24 @@ export const createOrder = (order) => async (dispatch, getState) => {
           ? error.response.data.message
           : error.message;
       dispatch({ type: ORDER_MINE_LIST_FAIL, payload: message });
+    }
+  };
+
+  export const trackorder = (orderid) => async (dispatch, getState) => {
+    dispatch({ type: ORDER_TRACK_REQUEST });
+    const {
+      userSignin: { userInfo },
+    } = getState();
+    try {
+      const { data } = await Axios.get(`${API}/orders/track/${orderid}`,{
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      });
+      dispatch({ type: ORDER_TRACK_SUCCESS, payload: data });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({ type: ORDER_TRACK_FAIL, payload: message || 'error' });
     }
   };

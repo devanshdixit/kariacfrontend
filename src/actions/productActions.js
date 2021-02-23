@@ -15,7 +15,7 @@ export const listProducts = () => async (dispatch) => {
     type: PRODUCT_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get(`${API}/product`);
+    const { data } = await Axios.get(`${API}/product`,);
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
       payload: data,
@@ -62,7 +62,6 @@ export const listBlogs = () => async (dispatch) => {
 };
 
 export const detailsBlog = (blogId) => async (dispatch) => {
-  console.log(blogId);
   dispatch({ type: BLOGS_DETAIL_REQUEST, payload: blogId });
   try {
     const { data } = await Axios.get(`${API}/blog/${blogId}`);

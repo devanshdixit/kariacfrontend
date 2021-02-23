@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import {
   addToCart,
   removeFromCart,
-  addToSummary,
 } from "../actions/cartActions";
+import Base from "../components/core/Base";
 
 export default function CartScreen(props) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -17,7 +17,7 @@ export default function CartScreen(props) {
     ? Number(props.location.search.split("=")[1])
     : 1;
   const cart = useSelector((state) => state.cart);
-  const { cartItems, summary } = cart;
+  const { cartItems } = cart;
   const dispatch = useDispatch();
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -36,6 +36,7 @@ export default function CartScreen(props) {
     props.history.push("/signin?redirect=shipping");
   };
   return (
+    <Base>
     <div className="container-fluid">
       <div className="row">
         {windowWidth <= 768 ? (
@@ -165,5 +166,6 @@ export default function CartScreen(props) {
         ) : null}
       </div>
     </div>
+    </Base>
   );
 }

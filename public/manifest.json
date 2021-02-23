@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Kariac",
+  "name": "Register using your e-mail and phone number (or do it via Facebook or Google). Make sure you’re entering a correct phone number, so your clients could reach you!",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "kariac.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
+      "src": "kariac.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "kariac.png",
       "type": "image/png",
       "sizes": "512x512"
     }

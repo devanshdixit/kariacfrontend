@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { detailsProduct } from "../actions/productActions";
+import Base from "../components/core/Base";
 
 export default function ProductScreen(props) {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function ProductScreen(props) {
 
  
   return (
+    <Base>
     <div className="container ">
       {loading ? (
         <div className="row mx-auto">
@@ -153,5 +155,6 @@ export default function ProductScreen(props) {
         </div>
       )}
     </div>
+    </Base>
   );
 }

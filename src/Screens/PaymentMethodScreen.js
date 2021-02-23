@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { savePaymentMethod } from '../actions/cartActions';
 import CheckoutSteps from '../components/CkeckoutSteps';
+import Base from '../components/core/Base';
 
 export default function PaymentMethodScreen(props) {
   const cart = useSelector((state) => state.cart);
@@ -17,6 +18,7 @@ export default function PaymentMethodScreen(props) {
     props.history.push('/placeorder');
   };
   return (
+  <Base>
     <div className='overflow-hidden'>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div  className='d-flex justify-content-center '>
@@ -55,5 +57,6 @@ export default function PaymentMethodScreen(props) {
       </div>
       </div>
     </div>
+    </Base>
   );
 }

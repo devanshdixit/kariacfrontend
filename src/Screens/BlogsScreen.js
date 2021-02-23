@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { listBlogs } from "../actions/productActions";
+import Base from "../components/core/Base";
 import MessageBox from "../components/MessageBox";
 
 export default function BlogsScreen(props) {
@@ -12,7 +13,8 @@ export default function BlogsScreen(props) {
     dispatch(listBlogs());
   }, [dispatch]);
   return (
-    <div className="container productcard p-4">
+    <Base>
+    <div className="container-fluid  p-4">
       {loading ? (
         <div className="row center">
           <h1>Loading .. </h1>
@@ -38,5 +40,6 @@ export default function BlogsScreen(props) {
         </div>
       )}
     </div>
+    </Base>
   );
 }

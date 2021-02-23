@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import LoadingBox from "../LoadingBox";
 import MessageBox from "../MessageBox";
 import { register } from "../../actions/userActions";
+import Base from "../core/Base";
 
 export default function RegisterScreen(props) {
   const [name, setName] = useState("");
@@ -137,10 +138,10 @@ export default function RegisterScreen(props) {
   };
 
   return (
-    <div>
+    <Base>
       {loading && <LoadingBox></LoadingBox>}
       {error && <MessageBox variant="danger">{error}</MessageBox>}
       {registerForm()}
-    </div>
+    </Base>
   );
 }

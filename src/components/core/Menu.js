@@ -21,13 +21,13 @@ const Menu = () => {
     dispatch(signout());
   };
   return (
-    <nav className="navbar navbar-expand-md navbarstyle  shadow-sm navbar-light sticky-top ">
+    <nav className="navbar navbar-expand-md   shadow-lg navbar-light sticky-top navbardesign ">
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img
-            src={`${process.env.PUBLIC_URL}/kariac.png`}
+            src={`${process.env.PUBLIC_URL}/images/kariacnew.png`}
             alt=""
-            style={{ height: "70px", width: "70px" }}
+            style={{ height: "70px", width: "100%" }}
           />
         </Link>
         <button
@@ -44,14 +44,15 @@ const Menu = () => {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
-                <h5
-                  className=" font-weight-bold "
+              <Link className="nav-link" to="/"
+              style={{ fontSize: "20px" }}>
+                <p
+                  className=" font-weight-bold text-white "
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
                   Home
-                </h5>
+                </p>
               </Link>
             </li>
             <li className="nav-item">
@@ -61,7 +62,7 @@ const Menu = () => {
                 style={{ fontSize: "20px" }}
               >
                 <p
-                  className=" font-weight-bold"
+                  className=" font-weight-bold text-white"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
@@ -79,7 +80,7 @@ const Menu = () => {
                 style={{ fontSize: "20px" }}
               >
                 <p
-                  className=" font-weight-bold"
+                  className=" font-weight-bold text-white"
                   data-toggle="collapse"
                   data-target=".navbar-collapse.show"
                 >
@@ -89,7 +90,7 @@ const Menu = () => {
             </li>
             <li className="nav-item dropdown">
               <Link
-                className="nav-link dropdown-toggle font-weight-bold"
+                className="nav-link dropdown-toggle font-weight-bold text-white"
                 to="#"
                 id="navbardrop"
                 data-toggle="dropdown"

@@ -4,35 +4,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { signin } from "../../actions/userActions";
 import LoadingBox from "../LoadingBox";
 import MessageBox from "../MessageBox";
+import Base from "../core/Base";
 
 export default function SigninScreen(props) {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const redirect = props.location.search
-    ? props.location.search.split('=')[1]
-    : '/';
-    const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo, loading, error } = userSignin;
-    const submitHandler = (e) => {
-      e.preventDefault();
-      dispatch(signin(email, password));
-    };
-    useEffect(() => {
-      if (userInfo) {
-        props.history.push(redirect);
-      }
-      
-    }, [props.history, redirect, userInfo]);
+    ? props.location.search.split("=")[1]
+    : "/";
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo, loading, error } = userSignin;
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(signin(email, password));
+  };
+  useEffect(() => {
+    if (userInfo) {
+      props.history.push(redirect);
+    }
+  }, [props.history, redirect, userInfo]);
 
   const signInForm = () => {
     return (
       <div className="login-form  shadow ">
         <form>
           <h2 className="text-center">Sign in</h2>
-          <div className="text-center social-btn">
-          </div>
+          <div className="text-center social-btn"></div>
           <div className="or-seperator">
             <i>or</i>
           </div>
@@ -99,11 +98,10 @@ export default function SigninScreen(props) {
   };
 
   return (
-    <div>
+    <Base>
       {loading && <LoadingBox></LoadingBox>}
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+      {error && <MessageBox variant="danger">{error}</MessageBox>}
       {signInForm()}
-    </div>
+    </Base>
   );
-};
-
+}

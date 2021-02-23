@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CkeckoutSteps";
+import Base from "../components/core/Base";
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { ORDER_CREATE_RESET } from "../constants/orderConstants";
@@ -33,6 +34,7 @@ export default function PlaceOrderScreen(props) {
     }
   }, [dispatch,order,props.history,success]);
   return (
+    <Base>
     <div className="conatiner-fluid  p-2">
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
       <div className="row ">
@@ -142,5 +144,6 @@ export default function PlaceOrderScreen(props) {
         </div>
       </div>
     </div>
+    </Base>
   );
 }

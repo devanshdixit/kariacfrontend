@@ -9,6 +9,7 @@ import MessageBox from "../components/MessageBox";
 import { Fragment } from "react";
 import Ravepayment from "./flutterrave";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
+import Base from "../components/core/Base";
  
 
 export default function OrderScreen(props) {
@@ -67,11 +68,15 @@ export default function OrderScreen(props) {
 
 
   return loading ? (
+    <Base>
     <LoadingBox></LoadingBox>
+    </Base>
   ) : error ? (
- 
+    <Base>
     <MessageBox variant="danger">{error}<Link to={props.match.path}>refresh</Link></MessageBox>
+    </Base>
   ) : (
+    <Base>
     <div className="container-fluid">
       <h6 className=" font-weight-bold m-3">Order : {order.id}</h6>
       {
@@ -143,7 +148,7 @@ export default function OrderScreen(props) {
                       </div>
                       <div className="col-md p-2">
                         <p className=" font-weight-bold">
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                          {item.qty} x ₦{item.price} = ₦{item.qty * item.price}
                         </p>
                       </div>
                     </div>
@@ -162,7 +167,7 @@ export default function OrderScreen(props) {
               <li className="productcard list-group-item border border-0 ">
                 <p className="float-left font-weight-bold d-inline">Items : </p>
                 <p className="float-right float-md-left font-weight-bold d-inline">
-                  ${order.itemsPrice.toFixed(2)}
+                ₦{order.itemsPrice.toFixed(2)}
                 </p>
               </li>
               <li className="productcard list-group-item  border border-0 ">
@@ -170,13 +175,13 @@ export default function OrderScreen(props) {
                   Shipping :{" "}
                 </p>
                 <p className="float-right float-md-left font-weight-bold d-inline">
-                  ${order.shippingPrice.toFixed(2)}
+                ₦{order.shippingPrice.toFixed(2)}
                 </p>
               </li>
               <li className="productcard list-group-item  border border-0">
                 <p className="float-left font-weight-bold d-inline">Tax :</p>
                 <p className="float-right float-md-left font-weight-bold d-inline">
-                  ${order.taxPrice.toFixed(2)}
+                ₦{order.taxPrice.toFixed(2)}
                 </p>
               </li>
               <li className="productcard list-group-item border border-0">
@@ -184,7 +189,7 @@ export default function OrderScreen(props) {
                   Order Total
                 </p>
                 <p className="float-right float-md-left font-weight-bold d-inline">
-                  ${order.totalPrice.toFixed(2)}
+                ₦{order.totalPrice.toFixed(2)}
                 </p>
               </li>
               {
@@ -202,5 +207,6 @@ export default function OrderScreen(props) {
         </div>
       </div>
     </div>
+    </Base>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { listProducts } from "../../actions/productActions";
+import Base from "../core/Base";
 import MessageBox from "../MessageBox";
 import Product from "../product/productcard";
 
@@ -13,20 +14,28 @@ export default function ProductsPage(props) {
     dispatch(listProducts());
   }, [dispatch]);
   return (
-    <div className="container  p-4">
+    <Base>
+    <div className="container-fluid  p-4 ">
       {loading ? (
         <div className="row center">
           <h1>Loading .. </h1>
         </div>
       ) : error ? (
-          <MessageBox variant="danger">{error}<Link to={props.match.path}>refresh</Link></MessageBox>
+        <MessageBox variant="danger">
+          {error}
+          <Link to={props.match.path}>refresh</Link>
+        </MessageBox>
       ) : (
-        <div className="card-columns">
-          {products.map((product) => (
-            <Product key={product._id} product={product}></Product>
-          ))}
-        </div>
+        <> 
+         
+          <div className="card-columns">
+            {products.map((product) => (
+              <Product key={product._id} product={product}></Product>
+            ))}
+          </div>
+        </>
       )}
     </div>
+    </Base>
   );
 }

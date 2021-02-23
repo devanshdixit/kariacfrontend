@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { listOrderMine } from '../actions/orderActions';
+import Base from '../components/core/Base';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -13,6 +14,7 @@ export default function OrderHistoryScreen(props) {
     dispatch(listOrderMine());
   }, [dispatch]);
   return (
+    <Base>
     <div className ='container p-5'>
       <h1>Order History</h1>
       {loading ? (
@@ -61,7 +63,7 @@ export default function OrderHistoryScreen(props) {
                     type="button"
                     className="btn btn-warning"
                     onClick={() => {
-                      props.history.push(`/order/${order.orderId}`);
+                      props.history.push(`/track/${order.orderId}`);
                     }}
                   >
                     Track Package
@@ -74,5 +76,6 @@ export default function OrderHistoryScreen(props) {
         </div>
       )}
     </div>
+    </Base>
   );
 }

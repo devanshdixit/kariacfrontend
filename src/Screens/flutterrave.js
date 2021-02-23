@@ -2,6 +2,7 @@ import React from 'react';
 import { FlutterWaveButton, closePaymentModal } from 'flutterwave-react-v3';
 import { useDispatch } from 'react-redux';
 import {  payOrder } from '../actions/orderActions';
+import Base from '../components/core/Base';
 
 export default function Ravepayment({user,order,props}) {
 
@@ -32,8 +33,10 @@ export default function Ravepayment({user,order,props}) {
   };
 
   return (
+    <Base>
     <div className="">
       <FlutterWaveButton {...fwConfig} />
     </div>
+    </Base>
   );
 }

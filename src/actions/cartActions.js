@@ -10,9 +10,9 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
   const { data } = await Axios.get(`${API}/product/${productId}`);
   var item = data[0];
   var total = 0;
-  var final = 0 ;
   if (data[0].currency_short_form === 'USD') {
-    const { data } = await Axios.get(`http://api.currencylayer.com/live?access_key=c31aba0cae892d26ab727e6e74710908&currencies=USD,NGN,CAD,PLN,MXN&format=1`);
+    const { data } = await Axios.get(`${API}/prices`);
+    console.log(data);
     const naira =  data.quotes.USDNGN;
     total = item.price * naira;
   } else {

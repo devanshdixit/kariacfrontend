@@ -13,6 +13,9 @@ import {
     ORDER_PAY_REQUEST,
     ORDER_PAY_RESET,
     ORDER_PAY_SUCCESS,
+    ORDER_TRACK_FAIL,
+    ORDER_TRACK_REQUEST,
+    ORDER_TRACK_SUCCESS,
   } from '../constants/orderConstants';
   
   export const orderCreateReducer = (state = {}, action) => {
@@ -70,5 +73,19 @@ import {
         return { loading: false, error: action.payload };
       default:
         return state;
+    }
+  };
+
+  export const trackOrderReducer = (state = { loading: true },
+    action) => {
+    switch (action.type) {
+        case ORDER_TRACK_REQUEST:
+          return { loading: true };
+        case ORDER_TRACK_SUCCESS:
+          return { loading: false, order: action.payload };
+        case ORDER_TRACK_FAIL:
+          return { loading: false, error: action.payload };
+        default:
+          return state;
     }
   };
